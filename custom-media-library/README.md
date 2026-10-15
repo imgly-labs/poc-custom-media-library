@@ -9,7 +9,14 @@ storage:
 - **My Collection panel**: a new dock button with its own icon. The panel lists
   the user's files in Images, Videos and Audio tabs.
 - **My Collection modal**: filters the user's files by date, type, favorites
-  and prompt, and adds several files at once.
+  and prompt, groups them by Today, Yesterday, Last 7 days and Older, and adds
+  several files to the video at once.
+
+**Live demo:** https://orfaf1ip.imgly.dev/ (no login needed)
+
+The example runs with demo storage: sample files instead of a real collection.
+Uploads stay in the browser and are gone after a reload. "Connect your
+storage" below replaces it with your backend.
 
 ## Run
 
@@ -56,15 +63,18 @@ panels and the built-in Uploads panel all use your storage.
 To use your backend, change one line in `src/App.tsx`:
 
 ```ts
-const storage = createHttpStorage("https://your-api.example.com");
+const storage = createHttpStorage('https://your-api.example.com');
 ```
 
-`createHttpStorage` (`src/storage/httpStorage.ts`) expects two endpoints:
+`createHttpStorage` (`src/storage/httpStorage.ts`) expects two endpoints. The
+file header describes the requests and responses. They are a proposal, so
+adapt them to the collection API you already have:
 
 1. **List**: returns the signed-in user's files as `MediaAsset` objects,
    filtered by kind, search text, date range and favorites, newest first.
 2. **Upload**: returns a signed PUT URL and the asset for the new file. The
-   browser uploads straight into the bucket.
+   browser uploads straight into the bucket, and your backend can then
+   register the file in the user's collection.
 
 With one Google Cloud Storage bucket shared by all users, the backend does the
 per-user filtering and signs the URLs, for example as V4 signed URLs. The
@@ -73,6 +83,9 @@ write your own `MediaStorage` instead; nothing else changes.
 
 Things to set up on the bucket and backend:
 
+- **Read URLs**: each file needs a `meta.uri` the browser can load, for
+  example a V4 signed URL. `MediaAsset` in `MediaStorage.ts` lists the other
+  fields the editor and the modal need.
 - **CORS**: allow `GET` and `PUT` from the editor's origin, otherwise the
   editor cannot load or upload files.
 - **Expiring URLs**: saved scenes keep each file's URL. If read URLs expire,
@@ -89,3 +102,13 @@ This example loads them from `/cesdk-assets/`. In development, Vite passes that
 path through to the IMG.LY CDN (`vite.config.ts`). In production, serve the
 CE.SDK assets and the asset sources you use from your own server at that path.
 The IMG.LY CDN is for testing only.
+
+## Documentation
+
+- [Create a custom panel](https://img.ly/docs/cesdk/react/user-interface/ui-extensions/create-custom-panel-d87b83/)
+- [Dock and component order](https://img.ly/docs/cesdk/react/user-interface/customization/reference/component-order-api-d4e5f6/)
+- [Asset library basics: asset sources and library entries](https://img.ly/docs/cesdk/react/import-media/asset-library/basics-f29078/)
+- [Load assets from your server](https://img.ly/docs/cesdk/react/import-media/from-remote-source/your-server-b91910/)
+- [User uploads](https://img.ly/docs/cesdk/react/import-media/from-local-source/user-upload-c6c7d9/)
+- [The `uploadFile` action](https://img.ly/docs/cesdk/react/actions-6ch24x/)
+- [URI resolver, for signed URLs that expire](https://img.ly/docs/cesdk/react/open-the-editor/uri-resolver-36b624/)
