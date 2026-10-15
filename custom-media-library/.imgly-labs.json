@@ -1,0 +1,12 @@
+{
+  "id": "orfaf1ip",
+  "slug": "custom-media-library",
+  "name": "Custom Media Library",
+  "description": "CE.SDK video editor with a custom Elements panel, a My Collection panel and modal, backed by a swappable storage",
+  "build": "npm ci && npm run build",
+  "assets": "dist",
+  "main": "labs/worker.ts",
+  "access": "public",
+  "harness": false,
+  "source": false
+}

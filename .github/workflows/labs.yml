@@ -1,0 +1,12 @@
+name: labs
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  labs:
+    uses: imgly-labs/.github/.github/workflows/labs-deploy.yml@main
+    permissions:
+      contents: read
+      id-token: write
+    secrets: inherit

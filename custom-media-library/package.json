@@ -1,0 +1,26 @@
+{
+  "name": "custom-media-library",
+  "version": "1.0.0",
+  "description": "CE.SDK video editor with a custom Elements panel, a My Collection panel and modal, backed by your own storage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@cesdk/cesdk-js": "1.84.0",
+    "@imgly/plugin-background-removal-web": "1.84.0",
+    "onnxruntime-web": "1.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
+  }
+}
