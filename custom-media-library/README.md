@@ -1,7 +1,7 @@
 # Custom media library (CE.SDK video editor, React)
 
-The video editor starter kit with three additions, all backed by your own
-storage:
+An example application: the CE.SDK video editor with three additions, all
+backed by your own storage:
 
 - **Elements panel**: the dock's Elements button opens a custom panel with
   search and sections for images, videos, audio, stickers and shapes. Images,
@@ -39,7 +39,7 @@ CE.SDK 1.84.0.
 | `src/collection-modal/` | The My Collection modal                                     | `CollectionModal.tsx`     |
 | `src/shared/`           | Code both panels use: the dock button toggle and the upload | `dockButton.ts`           |
 | `src/App.tsx`           | Creates the editor and wires the pieces together            |                           |
-| `src/video-editor/`     | The video editor configuration from our starter kit         | `plugin.ts`               |
+| `src/video-editor/`     | The video editor configuration: features, dock, panels      | `plugin.ts`               |
 | `labs/`                 | Only for our demo host, img.ly Labs. Not needed in your app |                           |
 
 Each panel folder has a `setup…` file: register the panel, then point a dock
